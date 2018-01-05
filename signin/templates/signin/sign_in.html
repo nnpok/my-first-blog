@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+              integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/sign_in.css' %}">
+        <link rel="icon" href="{% static 'image/web_icon.png' %}">
+
+        <title>Peace Point Meditation</title>
+    </head>
+    <body>
+        <div class="mountains"></div>
+        <img src="{% static 'image/logo.png' %}" class="logo" style="width:740px;"/>
+
+        <div id="left-content">
+
+            {% if user.is_authenticated %}
+            <div id="welcome">Welcome, {{ user.profile.first_name }}!</div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ old_member.as_p }}
+                <button type="submit">Sign in</button>
+            </form>
+            <a href="{% url 'new_member' %}">New Member Login</a>
+            <a href="{% url 'staff_login' %}">Staff Login</a>
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+            integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+            crossorigin="anonymous"></script>
+    </body>
+</html>

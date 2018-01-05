@@ -1,0 +1,24 @@
+.mountains {
+    position: relative;
+    background-image: url(../image/mountains.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: -1;
+    opacity: .8;
+}
+
+#welcome {
+    position relative;
+    left: 10px;
+    color: yellow;
+}
+
+.logo {
+    position: relative;
+    left: 50%;
+    top: 200px;
+    transform: translateX(-50%);
+}
