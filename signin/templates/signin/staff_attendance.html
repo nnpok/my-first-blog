@@ -1,0 +1,15 @@
+{% extends 'signin/staff_dash_base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/attendance.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% for day in dates %}
+        <div>
+            <span>Day: {{ day.date }}</span>
+            <span>Attended: {{ day.count }}</span>
+        </div>
+    {% endfor %}
+{% endblock %}

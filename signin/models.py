@@ -99,6 +99,8 @@ class Profile(models.Model):
                                 help_text="How did you hear about us?",
                                 max_length=6)
     staff = models.BooleanField(default=False)
+    last_active = models.DateField(default=timezone.now)
+    objects = models.Manager()
 
 
 def phone_exists(phone):
@@ -113,8 +115,7 @@ class Attendance(models.Model):
                                                            MinValueValidator(999999999),
                                                            phone_exists])
     date = models.DateField(default=timezone.now)
-
-
+    objects = models.Manager()
 
 
 # @receiver(post_save, sender=User)

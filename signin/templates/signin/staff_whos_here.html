@@ -1,0 +1,11 @@
+{% extends 'signin/staff_dash_base.html' %}
+{% load render_table from django_tables2 %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/whos_here.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% render_table table %}
+{% endblock %}
