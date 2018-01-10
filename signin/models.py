@@ -63,7 +63,7 @@ class Profile(models.Model):
         (NO, 'No')
     )
     previous_experience = models.CharField(choices=BOOLEAN_CHOICES, blank=False,
-                                           help_text="Have you meditated before?",
+                                           verbose_name="Have you meditated before?",
                                            max_length=1)
 
     occupation = models.CharField(max_length=70, blank=True, null=True)
@@ -96,7 +96,7 @@ class Profile(models.Model):
     )
     outreach = models.CharField(choices=MARKETING_CHOICES,
                                 blank=True, null=True,
-                                help_text="How did you hear about us?",
+                                verbose_name="How did you hear about us?",
                                 max_length=6)
     staff = models.BooleanField(default=False)
     last_active = models.DateField(default=timezone.now)
@@ -110,10 +110,18 @@ def phone_exists(phone):
         )
 
 
+def unique_signin(phone):
+    if Attendance.objects.filter(phone_number=phone, date=timezone.now()).exists():
+        raise ValidationError(
+            'You have already signed in today.'
+        )
+
+
 class Attendance(models.Model):
     phone_number = models.PositiveIntegerField(validators=[MaxValueValidator(10000000000),
                                                            MinValueValidator(999999999),
-                                                           phone_exists])
+                                                           phone_exists,
+                                                           unique_signin])
     date = models.DateField(default=timezone.now)
     objects = models.Manager()
 

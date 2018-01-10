@@ -23,7 +23,15 @@
             {% if not_staff == None %}
             <form method="POST">
                 {% csrf_token %}
-                {{ old_member.as_p }}
+                {% for field in old_member %}
+                    <div class="sign-in">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
                 <button type="submit" id="staff-login-button">Login</button>
             </form>
             {% else %}

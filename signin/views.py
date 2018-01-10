@@ -1,4 +1,4 @@
-from .forms import AttendanceForm, ProfileForm
+from .forms import AttendanceForm, ProfileForm, StaffForm
 from django.utils import timezone
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
@@ -9,9 +9,11 @@ from django_tables2 import RequestConfig
 from .tables import ProfileTable, HereTable
 from datetime import date, timedelta
 from django.db.models import Count
+from django.contrib.auth.views import logout
 
 
 def sign_in(request):
+    logout(request)
     if request.method == "POST":
         form = AttendanceForm(request.POST)
         if form.is_valid():
@@ -24,8 +26,12 @@ def sign_in(request):
 
             profile = Profile.objects.get(phone=username)
             profile.last_active = timezone.now()
+            profile.save()
+
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
+            form = AttendanceForm()
+            return render(request, 'signin/sign_in.html', {'old_member': form})
         return render(request, 'signin/sign_in.html', {'old_member': form})
     form = AttendanceForm()
     return render(request, 'signin/sign_in.html', {'old_member': form})
@@ -33,11 +39,9 @@ def sign_in(request):
 
 def staff_login(request):
     if request.method == "POST":
-        form = AttendanceForm(request.POST)
+        form = StaffForm(request.POST)
         if form.is_valid():
-            attendance = form.save(commit=False)
-            attendance.date = timezone.now()
-            username = attendance.phone_number
+            username = form.cleaned_data['phone_number']
 
             user = User.objects.get(username=username)
 
