@@ -1,0 +1,4 @@
+Django==1.11.8
+django-tables2==1.17.1
+django-toolbelt==0.0.1
+django-widget-tweaks==1.4.1
