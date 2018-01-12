@@ -89,10 +89,10 @@ def new_member(request):
                 user = authenticate(username=username, password=password)
                 login(request, user)
             return redirect('sign_in')
-        return render(request, 'signin/new_member.html', {'profile_form': profile_form})
+        return render(request, 'signin/new_member.html', {'form': profile_form})
     else:
         profile_form = ProfileForm()
-        return render(request, 'signin/new_member.html', {'profile_form': profile_form})
+        return render(request, 'signin/new_member.html', {'form': profile_form})
 
 
 def view_all_users(request):

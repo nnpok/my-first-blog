@@ -1,5 +1,6 @@
 <!doctype html>
 {% load staticfiles %}
+{% load widget_tweaks %}
 <html>
     <head>
         <meta charset="utf-8">
@@ -17,13 +18,251 @@
     <body>
         <div class="mountains"></div>
 
-        <form method="POST">{% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            <button type="submit">Submit</button>
+        <div class="form-background">
+            <div class="new-mem-welcome">Welcome to Peace Point Meditation!</div>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            <div class="left-panel">
+                <div class="sign-in">
+                    {% if form.first_name.errors %}
+                    {% for error in form.first_name.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.first_name.label }}</label>
+                    {{ form.first_name|add_class:"form-control sign-in-input new-mem new-mem-form"|attr:"placeholder:John"}}
+                    {% if form.first_name.help_text %}
+                    <p class="help">{{ form.first_name.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="sign-in">
+                    {% if form.last_name.errors %}
+                    {% for error in form.last_name.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.last_name.label }}</label>
+                    {{ form.last_name|add_class:"form-control sign-in-input new-mem new-mem-form"|attr:"placeholder:Doe"}}
+                    {% if form.last_name.help_text %}
+                    <p class="help">{{ form.last_name.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="sign-in">
+                    {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label email-label">{{ form.email.label }}</label>
+                    {{ form.email|add_class:"form-control sign-in-input new-mem new-mem-form email-input"|attr:"placeholder:email@example.com"}}
+                    {% if form.email.help_text %}
+                    <p class="help">{{ form.email.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="sign-in new-mem-phone-box">
+                    {% if form.gender.errors %}
+                    {% for error in form.gender.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.gender.label }}</label>
+                    {{ form.gender|add_class:"form-control sign-in-input new-mem new-mem-form"}}
+                    <div class="help">Your phone number will be used to sign in.</div>
+                </div>
+
+                <div class="sign-in">
+                    {% if form.phone.errors %}
+                    {% for error in form.phone.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.phone.label }}</label>
+                    {{ form.phone|add_class:"form-control sign-in-input new-mem new-mem-form"|attr:"placeholder:xxxxxxxxxx"}}
+                </div>
+
+                <div class="sign-in">
+                    {% if form.preferred_contact_method.errors %}
+                    {% for error in form.preferred_contact_method.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.preferred_contact_method.label }}</label>
+                    {{ form.preferred_contact_method|add_class:"form-control sign-in-input new-mem new-mem-form"}}
+                    {% if form.preferred_contact_method.help_text %}
+                    <div class="help">{{ form.preferred_contact_method.help_text|safe }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+
+
+
+            <div class="right-panel">
+
+                <div class="sign-in">
+                    {% if form.age.errors %}
+                    {% for error in form.age.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.age.label }}</label>
+                    {{ form.age|add_class:"form-control sign-in-input new-mem new-mem-form"}}
+                    {% if form.age.help_text %}
+                    <div class="help">{{ form.age.help_text|safe }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="sign-in">
+                    {% if form.zip_code.errors %}
+                    {% for error in form.zip_code.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        Invalid zip code.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.zip_code.label }}</label>
+                    {{ form.zip_code|add_class:"form-control sign-in-input new-mem new-mem-form"|attr:"placeholder:90027"}}
+                    {% if form.zip_code.help_text %}
+                    <div class="help">{{ form.zip_code.help_text|safe }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="sign-in new-mem-phone-box">
+                    {% if form.previous_experience %}
+                    {% for error in form.previous_experience.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.previous_experience.label }}</label>
+                    {{ form.previous_experience|add_class:"form-control sign-in-input new-mem new-mem-form"}}
+                    <div class="help">The remaining fields are optional.</div>
+                </div>
+
+                <div class="sign-in">
+                    {% if form.occupation.errors %}
+                    {% for error in form.occupation.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.occupation.label }}</label>
+                    {{ form.occupation|add_class:"form-control sign-in-input new-mem new-mem-form"|attr:"placeholder:Optional"}}
+                    {% if form.occupation.help_text %}
+                    <div class="help">{{ form.occupation.help_text|safe }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="sign-in">
+                    {% if form.ethnicity.errors %}
+                    {% for error in form.ethnicity.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.ethnicity.label }}</label>
+                    {{ form.ethnicity|add_class:"form-control sign-in-input new-mem new-mem-form"}}
+                    {% if form.ethnicity.help_text %}
+                    <div class="help">{{ form.ethnicity.help_text|safe }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="sign-in">
+                    {% if form.outreach.errors %}
+                    {% for error in form.outreach.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show new-mem-alert" role="alert">
+                        {{ error|escape }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <label class="new-mem-label">{{ form.outreach.label }}</label>
+                    {{ form.outreach|add_class:"form-control sign-in-input new-mem new-mem-form"}}
+                </div>
+
+            </div>
+
+            <div class="new-mem-buttons">
+                <button class="btn btn-primary btn-lg btn-block sign-in-input" type="submit">Sign up and sign in</button>
+                <a class="btn btn-secondary btn-lg btn-block" href="{% url 'sign_in' %}">Back</a>
+            </div>
         </form>
 
-        <a href="{% url 'sign_in' %}">Back</a>
+
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

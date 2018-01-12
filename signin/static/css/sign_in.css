@@ -6,7 +6,7 @@
     width: 100vw;
     position: absolute;
     z-index: -1;
-    opacity: .8;
+    opacity: .6;
 }
 
 body {
@@ -19,20 +19,37 @@ body {
     color: yellow;
 }
 
-.sign-in {
-    color:
+.sign-in-input {
+    margin-bottom: 10px;
 }
+
 
 #left-content {
     position: relative;
     width: 30vw;
-    top: 300px;
+    top: 250px;
     left: 100px;
+}
+
+.new-mem-buttons {
+    position: absolute;
+    width: 700px;
+    top: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#center-content-main {
+    position: relative;
+    width: 30vw;
+    top: 15vw;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #center-content {
     position: relative;
-    width: 300px;
+    width: 30vw;
     top: 250px;
     left: 50%;
     transform: translateX(-50%);
@@ -128,4 +145,101 @@ a:hover {
 
 .card-end {
     margin-right: 50px;
+}
+
+.new-mem {
+    display: inline-block;
+}
+
+.sign-in {
+    width: 425px;
+
+}
+
+.sign-in-phone {
+}
+
+.new-mem-phone-box {
+    position: relative;
+    height: 65px;
+
+}
+
+.left-panel {
+    position: absolute;
+    top: 200px;
+    left: 225px;
+    width: 415px;
+
+}
+
+.right-panel {
+    position: absolute;
+    top: 200px;
+    right: 280px;
+}
+
+.new-mem-form {
+    width: 33%;
+    position: relative;
+    right: 0px;
+    margin-right: 0px;
+
+}
+
+.new-mem-label {
+    width: 63%;
+    text-align: right;
+    position: relative;
+    margin-bottom: 0px;
+    padding-right: 10px;
+
+    font-size: 1.1em;
+}
+
+.help {
+    position: absolute;
+    right: 20px;
+    bottom: 0px;
+    color: #7D7D7D;
+}
+
+.red {
+    color: red;
+}
+
+.form-background {
+    position: relative;
+    width: 80vw;
+    height: 90%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+    opacity: .8;
+}
+
+.new-mem-welcome {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 40px;
+    width: 700px;
+    text-align: center;
+}
+
+.new-mem-alert {
+    font-size: 14px;
+    width: 413px;
+}
+
+.email-label {
+    width: 23%;
+}
+
+.email-input {
+    width: 73%;
 }

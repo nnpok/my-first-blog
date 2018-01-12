@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load widget_tweaks %}
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -18,27 +20,41 @@
         <div class="mountains"></div>
         <img src="{% static 'image/logo.png' %}" class="logo" style="width:740px;"/>
 
-        <div id="left-content">
+        <div id="center-content-main">
 
-            {% if user.is_authenticated %}
-            <div id="welcome">Welcome, {{ user.profile.first_name }}!</div>
+             {% if user.is_authenticated %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Welcome, <strong> {{ user.profile.first_name }} </strong>!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             {% endif %}
 
             <form method="POST">
                 {% csrf_token %}
                 {% for field in old_member %}
-                    <div class="sign-in">
-                        {{ field.errors }}
-                        {{ field.label_tag }} {{ field }}
+                    <div class="sign-in-phone">
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ error|escape }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        {{ field|add_class:"form-control form-control-lg sign-in-input"|attr:"placeholder:Phone Number" }}
                         {% if field.help_text %}
                         <p class="help">{{ field.help_text|safe }}</p>
                         {% endif %}
                     </div>
                 {% endfor %}
-                <button type="submit">Sign in</button>
+                <button class="btn btn-primary btn-lg btn-block sign-in-input" type="submit">Sign in</button>
             </form>
-            <a href="{% url 'new_member' %}">New Member Login</a>
-            <a href="{% url 'staff_login' %}">Staff Login</a>
+            <a class="btn btn-secondary btn-lg btn-block" href="{% url 'new_member' %}">I'm new.</a>
+            <a class="btn btn-secondary btn-lg btn-block" href="{% url 'staff_login' %}">Staff Login</a>
         </div>
 
 
