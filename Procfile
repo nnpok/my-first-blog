@@ -1,1 +1,1 @@
-web: gunicorn signin.wsgi
+web: gunicorn myapp.wsgi
