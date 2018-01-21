@@ -20,7 +20,7 @@
 
         <div class="form-background">
             <div class="new-mem-welcome">Welcome to Peace Point Meditation!</div>
-        </div>
+
 
         <form method="POST">
             {% csrf_token %}
@@ -257,11 +257,22 @@
             </div>
 
             <div class="new-mem-buttons">
-                <button class="btn btn-primary btn-lg btn-block sign-in-input" type="submit">Sign up and sign in</button>
-                <a class="btn btn-secondary btn-lg btn-block" href="{% url 'sign_in' %}">Back</a>
+                <div class="photo-release">Your photo may be taken for promotional content.
+                    If this is an issue, please let the staff know.</div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4 ">
+                        <button class="btn btn-primary btn-lg btn-block sign-in-input full" type="submit">Sign up and sign in</button>
+                    </div>
+
+                    <div class="col-md-4">
+                    <a class="btn btn-secondary btn-lg btn-block full" href="{% url 'sign_in' %}">Back</a>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
             </div>
         </form>
-
+        </div>
 
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

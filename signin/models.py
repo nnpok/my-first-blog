@@ -5,6 +5,15 @@ from django.dispatch import receiver
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+import re
+
+
+def phone_regex(phone):
+    pattern = re.compile("^\d{10}$")
+    if not pattern.match(phone):
+        raise ValidationError(
+            'Phone number must be 10 digits.'
+        )
 
 
 class Profile(models.Model):
@@ -23,11 +32,10 @@ class Profile(models.Model):
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=False)
     email = models.EmailField(max_length=254, null=True)
-    phone = models.PositiveIntegerField(validators=[MaxValueValidator(10000000000),
-                                                    MinValueValidator(999999999)],
+    phone = models.CharField(max_length=10,
                                         blank=False, unique=True,
-                                        help_text="This will be your future login.",
-                                        null=True)
+                                        help_text="Your phone number will be used to sign in",
+                                        null=True, validators=[phone_regex])
     EMAIL = 'email'
     PHONE = 'phone'
     NONE = 'none'
@@ -118,12 +126,14 @@ def unique_signin(phone):
 
 
 class Attendance(models.Model):
-    phone_number = models.PositiveIntegerField(validators=[MaxValueValidator(10000000000),
-                                                           MinValueValidator(999999999),
-                                                           phone_exists,
-                                                           unique_signin])
+    phone_number = models.CharField(max_length=10, validators=[phone_regex, unique_signin, phone_exists])
     date = models.DateField(default=timezone.now)
     objects = models.Manager()
+
+    @classmethod
+    def create(cls, phone):
+        attendance = cls(phone_number=phone, date=timezone.now)
+        return attendance
 
 
 # @receiver(post_save, sender=User)

@@ -20,9 +20,10 @@
         <div class="mountains"></div>
         <img src="{% static 'image/logo.png' %}" class="logo" style="width:740px;"/>
 
-        <div id="center-content-main">
-
-             {% if user.is_authenticated %}
+        <div class="sign-in-buttons row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+            {% if user.is_authenticated %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     Welcome, <strong> {{ user.profile.first_name }} </strong>!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -53,8 +54,16 @@
                 {% endfor %}
                 <button class="btn btn-primary btn-lg btn-block sign-in-input" type="submit">Sign in</button>
             </form>
-            <a class="btn btn-secondary btn-lg btn-block" href="{% url 'new_member' %}">I'm new.</a>
-            <a class="btn btn-secondary btn-lg btn-block" href="{% url 'staff_login' %}">Staff Login</a>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-secondary btn-lg btn-block" href="{% url 'new_member' %}">I'm new.</a>
+                <a class="btn btn-secondary btn-lg btn-block" href="{% url 'staff_login' %}">Staff Login</a>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+        <div class="main-disclaimer">
+            Your photo may be taken for promotional content. If this is an issue, please let the staff know.
         </div>
 
 

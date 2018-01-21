@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, Attendance, User, phone_exists
+from .models import Profile, Attendance, User, phone_exists, unique_signin
 from django.core.exceptions import ValidationError
 
 
@@ -11,15 +11,7 @@ class AttendanceForm(forms.ModelForm):
 
 
 class StaffForm(forms.Form):
-    phone_number = forms.IntegerField(max_value=10000000000, min_value=999999999,
-                                      validators=[phone_exists])
-
-
-def phone_exists(self):
-    if not User.objects.filter(username=self).exists():
-        raise ValidationError(
-            'That phone number is not associated with a user.'
-        )
+    phone_number = forms.CharField(max_length=10, validators=[phone_exists])
 
 
 class ProfileForm(forms.ModelForm):

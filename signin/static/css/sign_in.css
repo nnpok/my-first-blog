@@ -23,6 +23,27 @@ body {
     margin-bottom: 10px;
 }
 
+.sign-in-buttons {
+    position: absolute;
+    width: 100%;
+    top: 425px;
+}
+
+.main-disclaimer {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    padding: 15px;
+    background-color: #303030;
+    color: white;
+}
+
+.main-page-buttons {
+    height: 300px;
+
+}
+
 
 #left-content {
     position: relative;
@@ -33,10 +54,21 @@ body {
 
 .new-mem-buttons {
     position: absolute;
-    width: 700px;
-    top: 600px;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 100%;
+    bottom: 45px;
+    text-align: center;
+}
+
+.btn .btn-secondary .btn-lg .btn-block .full {
+    opacity: 1;
+}
+
+.btn .btn-primary .btn-lg .btn-block .full {
+    opacity: 1;
+}
+
+.photo-release {
+    padding-bottom: 10px;
 }
 
 #center-content-main {
@@ -167,16 +199,16 @@ a:hover {
 
 .left-panel {
     position: absolute;
-    top: 200px;
-    left: 225px;
+    top: 120px;
+    left: 50px;
     width: 415px;
 
 }
 
 .right-panel {
     position: absolute;
-    top: 200px;
-    right: 280px;
+    top: 120px;
+    right: 100px;
 }
 
 .new-mem-form {

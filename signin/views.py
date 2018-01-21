@@ -10,10 +10,15 @@ from .tables import ProfileTable, HereTable
 from datetime import date, timedelta
 from django.db.models import Count
 from django.contrib.auth.views import logout
-
+import re
+from django.core.exceptions import ValidationError
 
 def sign_in(request):
     logout(request)
+    return sign_in_new(request)
+
+
+def sign_in_new(request):
     if request.method == "POST":
         form = AttendanceForm(request.POST)
         if form.is_valid():
@@ -32,6 +37,7 @@ def sign_in(request):
             login(request, user)
             form = AttendanceForm()
             return render(request, 'signin/sign_in.html', {'old_member': form})
+        logout(request)
         return render(request, 'signin/sign_in.html', {'old_member': form})
     form = AttendanceForm()
     return render(request, 'signin/sign_in.html', {'old_member': form})
@@ -88,7 +94,7 @@ def new_member(request):
 
                 user = authenticate(username=username, password=password)
                 login(request, user)
-            return redirect('sign_in')
+                return redirect('sign_in_new')
         return render(request, 'signin/new_member.html', {'form': profile_form})
     else:
         profile_form = ProfileForm()
